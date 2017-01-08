@@ -102,14 +102,18 @@ class ViewController: UIViewController {
         
         if lresource1 == "Grain" && lresource2 == "Grain" {
             craftedRecipe = "You made bread"
+            currentScore += 2
         } else if lresource1 == "Grain" && lresource3 == "Grain" {
             craftedRecipe = "You made bread"
+            currentScore += 2
         } else if lresource3 == "Grain" && lresource2 == "Grain" {
             craftedRecipe = "You made bread"
+            currentScore += 2
         }
         
         if lresource1 == "Poop" || lresource2 == "Poop" || lresource3 == "Poop" {
             craftedRecipe = "Poop for dinner"
+            currentScore -= 1
         }
     }
     

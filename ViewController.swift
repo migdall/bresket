@@ -17,6 +17,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var resource1Label: UILabel!
     @IBOutlet weak var resource2Label: UILabel!
     @IBOutlet weak var resource3Label: UILabel!
+    @IBOutlet weak var deathLabel: UILabel!
     
     @IBOutlet weak var seedButton: UIButton!
     @IBOutlet weak var craftButton: UIButton!
@@ -33,6 +34,7 @@ class ViewController: UIViewController {
     
     var craftedRecipe: String = "Nothing was crafted"
     
+    var rounds: Int = 0
     
     var updateTimer: Timer?
     
@@ -79,6 +81,7 @@ class ViewController: UIViewController {
         if currentScore <= 0 {
             hideAll()
             blankScreenWhite()
+            displayDeathLabel()
         } else {
             startNewRound()
         }
@@ -98,12 +101,14 @@ class ViewController: UIViewController {
     }
     
     func startNewGame() {
+        hideDeathLabel()
         hideCraftButton()
         hideResourceLabels()
         resetCurrentScore()
         displaySeedButton()
         displayScore()
         updateLabels()
+        resetRounds()
     }
     
     func craftRecipe() {
@@ -173,6 +178,8 @@ class ViewController: UIViewController {
         hideResourceLabels()
         displaySeedButton()
         updateLabels()
+        
+        rounds += 1
     }
     
     func updateLabels() {
@@ -221,5 +228,19 @@ class ViewController: UIViewController {
         hideSeedButton()
         hideResourceLabels()
         hideScore()
+    }
+    
+    func resetRounds() {
+        rounds = 0
+    }
+    
+    func displayDeathLabel() {
+        deathLabel.text = "\(rounds) rounds"
+        deathLabel.isHidden = false
+    }
+    
+    func hideDeathLabel() {
+        deathLabel.text = ""
+        deathLabel.isHidden = true
     }
 }

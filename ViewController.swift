@@ -13,6 +13,7 @@ class ViewController: UIViewController {
     
     // Outlets
     @IBOutlet weak var scoreLabel: UILabel!
+    @IBOutlet weak var scoreTextLabel: UILabel!
     @IBOutlet weak var resource1Label: UILabel!
     @IBOutlet weak var resource2Label: UILabel!
     @IBOutlet weak var resource3Label: UILabel!
@@ -73,6 +74,14 @@ class ViewController: UIViewController {
     
     @IBAction func beginCrafting() {
         craftRecipe()
+        
+        // Lose condition
+        if currentScore <= 0 {
+            hideAll()
+            blankScreenWhite()
+        } else {
+            startNewRound()
+        }
     }
     
     func backgroundStartNewGame() {
@@ -91,7 +100,8 @@ class ViewController: UIViewController {
     func startNewGame() {
         hideCraftButton()
         hideResourceLabels()
-        startNewRound()
+        resetCurrentScore()
+        displaySeedButton()
         updateLabels()
     }
     
@@ -138,8 +148,10 @@ class ViewController: UIViewController {
     }
     
     func startNewRound() {
-        resetCurrentScore()
+        hideCraftButton()
+        hideResourceLabels()
         displaySeedButton()
+        updateLabels()
     }
     
     func updateLabels() {
@@ -167,5 +179,21 @@ class ViewController: UIViewController {
         resourceBarrel1Index = Int(arc4random_uniform(7))
         resourceBarrel2Index = Int(arc4random_uniform(7))
         resourceBarrel3Index = Int(arc4random_uniform(7))
+    }
+    
+    func blankScreenWhite() {
+        view.backgroundColor = UIColor.white
+    }
+    
+    func hideScore() {
+        scoreLabel.isHidden = true
+        scoreTextLabel.isHidden = true
+    }
+    
+    func hideAll() {
+        hideCraftButton()
+        hideSeedButton()
+        hideResourceLabels()
+        hideScore()
     }
 }

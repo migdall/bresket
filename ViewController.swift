@@ -16,9 +16,19 @@ class ViewController: UIViewController {
     @IBOutlet weak var resource1Label: UILabel!
     @IBOutlet weak var resource2Label: UILabel!
     @IBOutlet weak var resource3Label: UILabel!
-
     
     @IBOutlet weak var seedButton: UIButton!
+    
+    // End of Outlets
+    
+    var resourceBarrel1: [String] = ["Grain", "Rock", "Berry", "Pinecone", "Weed", "Moss", "Grain"]
+    var resourceBarrel2: [String] = ["Grain", "Rock", "Berry", "Pinecone", "Weed", "Moss", "Poop"]
+    var resourceBarrel3: [String] = ["Grain", "Rock", "Berry", "Grain", "Weed", "Moss", "Grain"]
+    
+    var resourceBarrel1Index: Int = 0
+    var resourceBarrel2Index: Int = 0
+    var resourceBarrel3Index: Int = 0
+    
     
     var updateTimer: Timer?
     
@@ -52,6 +62,7 @@ class ViewController: UIViewController {
         
         // Hide the seed Button
         hideSeedButton()
+        calculateResourceBarrelsIndexes()
         showResourceLabels()
     }
     
@@ -101,8 +112,19 @@ class ViewController: UIViewController {
     }
     
     func showResourceLabels() {
+        // Set the text property of the labels
+        resource1Label.text = resourceBarrel1[resourceBarrel1Index]
+        resource2Label.text = resourceBarrel2[resourceBarrel2Index]
+        resource3Label.text = resourceBarrel3[resourceBarrel3Index]
+        
         resource1Label.isHidden = false
         resource2Label.isHidden = false
         resource3Label.isHidden = false
+    }
+    
+    func calculateResourceBarrelsIndexes() {
+        resourceBarrel1Index = Int(arc4random_uniform(7))
+        resourceBarrel2Index = Int(arc4random_uniform(7))
+        resourceBarrel3Index = Int(arc4random_uniform(7))
     }
 }

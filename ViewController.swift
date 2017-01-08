@@ -18,6 +18,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var resource3Label: UILabel!
     
     @IBOutlet weak var seedButton: UIButton!
+    @IBOutlet weak var craftButton: UIButton!
     
     // End of Outlets
     
@@ -29,14 +30,17 @@ class ViewController: UIViewController {
     var resourceBarrel2Index: Int = 0
     var resourceBarrel3Index: Int = 0
     
+    var craftedRecipe: String = "Nothing was crafted"
+    
     
     var updateTimer: Timer?
     
-    var currentScore: Int = 0
+    var currentScore: Int = 10
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        hideCraftButton()
         hideResourceLabels()
         startNewGame()
     }
@@ -62,8 +66,13 @@ class ViewController: UIViewController {
         
         // Hide the seed Button
         hideSeedButton()
+        displayCraftButton()
         calculateResourceBarrelsIndexes()
         showResourceLabels()
+    }
+    
+    @IBAction func beginCrafting() {
+        craftRecipe()
     }
     
     func backgroundStartNewGame() {
@@ -80,20 +89,48 @@ class ViewController: UIViewController {
     }
     
     func startNewGame() {
+        hideCraftButton()
+        hideResourceLabels()
         startNewRound()
         updateLabels()
     }
     
+    func craftRecipe() {
+        let lresource1: String = resourceBarrel1[resourceBarrel1Index]
+        let lresource2: String = resourceBarrel2[resourceBarrel2Index]
+        let lresource3: String = resourceBarrel3[resourceBarrel3Index]
+        
+        if lresource1 == "Grain" && lresource2 == "Grain" {
+            craftedRecipe = "You made bread"
+        } else if lresource1 == "Grain" && lresource3 == "Grain" {
+            craftedRecipe = "You made bread"
+        } else if lresource3 == "Grain" && lresource2 == "Grain" {
+            craftedRecipe = "You made bread"
+        }
+        
+        if lresource1 == "Poop" || lresource2 == "Poop" || lresource3 == "Poop" {
+            craftedRecipe = "Poop for dinner"
+        }
+    }
+    
     func resetCurrentScore() {
-        currentScore = 0
+        currentScore = 10
     }
     
     func displaySeedButton() {
         seedButton.isHidden = false
     }
     
+    func displayCraftButton() {
+        craftButton.isHidden = false
+    }
+    
     func hideSeedButton() {
         seedButton.isHidden = true
+    }
+    
+    func hideCraftButton() {
+        craftButton.isHidden = true
     }
     
     func startNewRound() {

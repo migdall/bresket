@@ -235,7 +235,7 @@ class ViewController: UIViewController {
     }
     
     func displayDeathLabel() {
-        deathLabel.text = "\(rounds) rounds"
+        deathLabel.text = "\(rounds) days"
         deathLabel.isHidden = false
     }
     

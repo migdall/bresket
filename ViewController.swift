@@ -102,6 +102,7 @@ class ViewController: UIViewController {
         hideResourceLabels()
         resetCurrentScore()
         displaySeedButton()
+        displayScore()
         updateLabels()
     }
     
@@ -208,6 +209,11 @@ class ViewController: UIViewController {
     func hideScore() {
         scoreLabel.isHidden = true
         scoreTextLabel.isHidden = true
+    }
+    
+    func displayScore() {
+        scoreLabel.isHidden = false
+        scoreTextLabel.isHidden = false
     }
     
     func hideAll() {

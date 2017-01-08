@@ -13,6 +13,12 @@ class ViewController: UIViewController {
     
     // Outlets
     @IBOutlet weak var scoreLabel: UILabel!
+    @IBOutlet weak var resource1Label: UILabel!
+    @IBOutlet weak var resource2Label: UILabel!
+    @IBOutlet weak var resource3Label: UILabel!
+
+    
+    @IBOutlet weak var seedButton: UIButton!
     
     var updateTimer: Timer?
     
@@ -21,12 +27,8 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        startNewRound()
-        updateLabels()
-    }
-    
-    deinit {
-        NotificationCenter.default.removeObserver(self)
+        hideResourceLabels()
+        startNewGame()
     }
     
     override func didReceiveMemoryWarning() {
@@ -34,31 +36,31 @@ class ViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    @IBAction func addScore() {
-        currentScore += 1
-        
-        updateLabels()
+    @IBAction func beginSeeding() {
         
         switch UIApplication.shared.applicationState {
         case .active:
             if updateTimer == nil {
-                updateTimer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(calculateZeroScore), userInfo: nil, repeats: true)
+                updateTimer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(backgroundStartNewGame), userInfo: nil, repeats: true)
             }
         case .background:
             break
         case .inactive:
             break
         }
-
+        
+        
+        // Hide the seed Button
+        hideSeedButton()
+        showResourceLabels()
     }
     
-    func calculateZeroScore() {
+    func backgroundStartNewGame() {
         switch UIApplication.shared.applicationState {
         case .active:
             break
         case .background:
-            startNewRound()
-            updateLabels()
+            startNewGame()
             updateTimer?.invalidate()
             updateTimer = nil
         case .inactive:
@@ -66,11 +68,41 @@ class ViewController: UIViewController {
         }
     }
     
-    func startNewRound() {
+    func startNewGame() {
+        startNewRound()
+        updateLabels()
+    }
+    
+    func resetCurrentScore() {
         currentScore = 0
+    }
+    
+    func displaySeedButton() {
+        seedButton.isHidden = false
+    }
+    
+    func hideSeedButton() {
+        seedButton.isHidden = true
+    }
+    
+    func startNewRound() {
+        resetCurrentScore()
+        displaySeedButton()
     }
     
     func updateLabels() {
         scoreLabel.text = String(currentScore)
+    }
+    
+    func hideResourceLabels() {
+        resource1Label.isHidden = true
+        resource2Label.isHidden = true
+        resource3Label.isHidden = true
+    }
+    
+    func showResourceLabels() {
+        resource1Label.isHidden = false
+        resource2Label.isHidden = false
+        resource3Label.isHidden = false
     }
 }

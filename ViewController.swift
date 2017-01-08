@@ -123,7 +123,27 @@ class ViewController: UIViewController {
         
         if lresource1 == "Poop" || lresource2 == "Poop" || lresource3 == "Poop" {
             craftedRecipe = "Poop for dinner"
+            currentScore -= 5
+        }
+        
+        if lresource1 == "Rock" || lresource2 == "Rock" || lresource3 == "Rock" {
+            craftedRecipe = "Stones soup"
+            currentScore -= 3
+        }
+        
+        if lresource1 == "Pinecone" || lresource2 == "Pinecone" || lresource3 == "Pinecone" {
+            craftedRecipe = "Pine needles"
             currentScore -= 1
+        }
+        
+        if lresource1 == "Weed" || lresource2 == "Weed" || lresource3 == "Weed" {
+            craftedRecipe = "Disrupt my flow"
+            currentScore += 1
+        }
+        
+        if lresource1 == "Moss" || lresource2 == "Moss" || lresource3 == "Moss" {
+            craftedRecipe = "Disrupt my flow"
+            currentScore += 1
         }
     }
     

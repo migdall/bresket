@@ -39,6 +39,9 @@ class ViewController: UIViewController {
     var updateTimer: Timer?
     
     var currentScore: Int = 10
+    
+    // Inventory
+    var playerInventory = [String]()
 
     override func viewDidLoad() {
         super.viewDidLoad()

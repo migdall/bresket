@@ -238,7 +238,13 @@ class ViewController: UIViewController {
     }
     
     func displayDeathLabel() {
-        deathLabel.text = "\(rounds) days"
+        if rounds == 1 {
+            deathLabel.text = "\(rounds) day"
+        } else if rounds <= 0 {
+            deathLabel.text = "no life to live"
+        } else {
+            deathLabel.text = "\(rounds) days"
+        }
         deathLabel.isHidden = false
     }
     
